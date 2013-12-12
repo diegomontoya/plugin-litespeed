@@ -42,7 +42,7 @@ if (_fs.existsSync(_path.join(_reportPath, '.rtreport')))
     _reports.push(_path.join(_reportPath, '.rtreport'));
 
 // now check if the individual CPU files exist
-for(var i=0; i<_os.cpus().length; i++)
+for(var i=1; i<_os.cpus().length; i++)
     if (_fs.existsSync(_path.join(_reportPath, '.rtreport.' + i)))
         _reports.push(_path.join(_reportPath, '.rtreport.' + i));
 
