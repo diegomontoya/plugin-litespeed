@@ -20,12 +20,12 @@
         "LS_TOTAL_BYTES_OUT",
 
         "LS_TOTAL_CACHE_HITS",
-        "LS_TOTAL_CACHE_RATE",
+        "LS_TOTAL_CACHE_HITRATE",
         "LS_TOTAL_REQS_PROCESSING",
         "LS_TOTAL_REQS",
 
         "LS_CACHE_HITS",
-        "LS_CACHE_RATE",
+        "LS_CACHE_HITRATE",
         "LS_REQS_PROCESSING",
         "LS_REQS",
 
@@ -40,7 +40,7 @@
     ],
 
     "dashboards": [
-        { "name": "Litespeed-Overview-Dev", "layout": "d-w=3&d-h=3&d-pad=5&d-bg=none&d-g-LS_HTTPS_BYTES_IN=1-0-1-1-t&d-g-LS_HTTPS_BYTES_OUT=1-0-1-1-b&d-g-LS_HTTP_BYTES_IN=0-0-1-1-t&d-g-LS_HTTP_BYTES_OUT=0-0-1-1-b&d-g-LS_TOTAL_BYTES_IN=2-0-1-1-t&d-g-LS_TOTAL_BYTES_OUT=2-0-1-1-b&d-g-LS_VHOST_CACHE_RATIO=2-2-1-1&d-g-LS_HTTP_CONNECTIONS=0-1-1-1&d-g-LS_HTTP_CONNECTION_USAGE=0-2-1-1&d-g-LS_HTTPS_CONNECTIONS=1-1-1-1&d-g-LS_HTTPS_CONNECTION_USAGE=1-2-1-1&d-g-LS_VHOST_REQUESTS=2-1-1-1" }
+        { "name": "Litespeed-Overview-Dev", "layout": "d-w=3&d-h=3&d-pad=5&d-bg=none&d-g-LS_SSL_BYTES_IN=1-0-1-1-t&d-g-LS_SSL_BYTES_OUT=1-0-1-1-b&d-g-LS_HTTP_BYTES_IN=0-0-1-1-t&d-g-LS_HTTP_BYTES_OUT=0-0-1-1-b&d-g-LS_TOTAL_BYTES_IN=2-0-1-1-t&d-g-LS_TOTAL_BYTES_OUT=2-0-1-1-b&d-g-LS_CACHE_HITRATE=2-2-1-1&d-g-LS_HTTP_CONNS=0-1-1-1&d-g-LS_HTTP_CONNS_USAGE=0-2-1-1&d-g-LS_SSL_CONNS=1-1-1-1&d-g-LS_SSL_CONNS_USAGE=1-2-1-1&d-g-LS_REQS=2-1-1-1" }
     ],
 
     "paramSchema" : [

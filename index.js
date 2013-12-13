@@ -377,7 +377,7 @@ function poll(cb)
                 var request_processing = cur_host.REQ_PROCESSING || 0;
 
                 console.log('LS_CACHE_HITS %d %s', cacheHits, _source + '-' + vhostname);
-                console.log('LS_CACHE_RATIO %d %s', cacheRatio,_source + '-' + vhostname);
+                console.log('LS_CACHE_HITRATE %d %s', cacheRatio,_source + '-' + vhostname);
                 console.log('LS_REQS %d %s', requests, _source + '-' + vhostname);
                 console.log('LS_REQS_PROCESSING %s %s', request_processing, _source + '-' + vhostname);
 
@@ -394,7 +394,7 @@ function poll(cb)
             }
 
             console.log('LS_TOTAL_CACHE_HITS %d %s', total_cacheHits, _source);
-            console.log('LS_TOTAL_CACHE_RATIO %d %s', total_requests ? (total_cacheHits / total_requests).toFixed(4) : 0, _source);
+            console.log('LS_TOTAL_CACHE_HITRATE %d %s', total_requests ? (total_cacheHits / total_requests).toFixed(4) : 0, _source);
             console.log('LS_TOTAL_REQS %d %s', total_requests, _source);
             console.log('LS_TOTAL_REQS_PROCSSING %d %s', total_requests_processing, _source);
 
