@@ -2,7 +2,7 @@
 	"name": "graphdat-litespeed-plugin",
 	"version": "0.0.1",
 	"private": false,
-	"description": "Litespeed plugin for Graphat",
+	"description": "LiteSpeed Web Server plugin for Graphat",
 	"main": "index.js",
 	"devDependencies": {},
 	"dependencies": {

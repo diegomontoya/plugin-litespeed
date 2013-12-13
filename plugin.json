@@ -6,44 +6,73 @@
     "ignore" : "node_modules",
 
     "metrics" : [
-        "LITESPEED_HTTP_CONNECTION_LIMIT",
-        "LITESPEED_HTTP_CONNECTIONS",
-        "LITESPEED_HTTP_IDLE_CONNECTIONS",
-        "LITESPEED_HTTPS_CONNECTION_LIMIT",
-        "LITESPEED_HTTPS_CONNECTIONS",
-        "LITESPEED_HTTPS_IDLE_CONNECTIONS",
-        "LITESPEED_HTTP_BYTES_IN",
-        "LITESPEED_HTTP_BYTES_OUT",
-        "LITESPEED_HTTPS_BYTES_IN",
-        "LITESPEED_HTTPS_BYTES_OUT",
-        "LITESPEED_TOTAL_BYTES_IN",
-        "LITESPEED_TOTAL_BYTES_OUT",
-        "LITESPEED_CACHE_HITS",
-        "LITESPEED_CACHE_RATIO",
-        "LITESPEED_REQUESTS_IN_PROCESS",
-        "LITESPEED_REQUESTS"
+        "LS_HTTP_CONNS_USAGE",
+        "LS_HTTP_CONNS",
+        "LS_HTTP_IDLE_CONNS",
+        "LS_SSL_CONNS_USAGE",
+        "LS_SSL_CONNS",
+        "LS_SSL_IDLE_CONNS",
+        "LS_HTTP_BYTES_IN",
+        "LS_HTTP_BYTES_OUT",
+        "LS_SSL_BYTES_IN",
+        "LS_SSL_BYTES_OUT",
+        "LS_TOTAL_BYTES_IN",
+        "LS_TOTAL_BYTES_OUT",
+
+        "LS_TOTAL_CACHE_HITS",
+        "LS_TOTAL_CACHE_RATE",
+        "LS_TOTAL_REQS_PROCESSING",
+        "LS_TOTAL_REQS",
+
+        "LS_CACHE_HITS",
+        "LS_CACHE_RATE",
+        "LS_REQS_PROCESSING",
+        "LS_REQS",
+
+        "LS_EXT_CMAXCONNS",
+        "LS_EXT_EMAXCONNS",
+        "LS_EXT_POOL_SIZE",
+        "LS_EXT_INUSE_CONNS",
+        "LS_EXT_IDLE_CONNS",
+        "LS_EXT_QUEUE",
+        "LS_EXT_REQS",
+        "LS_EXT_TOTAL_REQS"
     ],
 
     "dashboards": [
-        { "name": "litespeed-overview", "layout": "d-w=3&d-h=3&d-pad=5&d-bg=none&d-g-LITESPEED_HTTPS_BYTES_IN=1-0-1-1-t&d-g-LITESPEED_HTTPS_BYTES_OUT=1-0-1-1-b&d-g-LITESPEED_HTTP_BYTES_IN=0-0-1-1-t&d-g-LITESPEED_HTTP_BYTES_OUT=0-0-1-1-b&d-g-LITESPEED_TOTAL_BYTES_IN=2-0-1-1-t&d-g-LITESPEED_TOTAL_BYTES_OUT=2-0-1-1-b&d-g-LITESPEED_CACHE_RATIO=2-2-1-1&d-g-LITESPEED_HTTP_CONNECTIONS=0-1-1-1&d-g-LITESPEED_HTTP_CONNECTION_LIMIT=0-2-1-1&d-g-LITESPEED_HTTPS_CONNECTIONS=1-1-1-1&d-g-LITESPEED_HTTPS_CONNECTION_LIMIT=1-2-1-1&d-g-LITESPEED_REQUESTS=2-1-1-1" }
+        { "name": "Litespeed-Overview-Dev", "layout": "d-w=3&d-h=3&d-pad=5&d-bg=none&d-g-LS_HTTPS_BYTES_IN=1-0-1-1-t&d-g-LS_HTTPS_BYTES_OUT=1-0-1-1-b&d-g-LS_HTTP_BYTES_IN=0-0-1-1-t&d-g-LS_HTTP_BYTES_OUT=0-0-1-1-b&d-g-LS_TOTAL_BYTES_IN=2-0-1-1-t&d-g-LS_TOTAL_BYTES_OUT=2-0-1-1-b&d-g-LS_VHOST_CACHE_RATIO=2-2-1-1&d-g-LS_HTTP_CONNECTIONS=0-1-1-1&d-g-LS_HTTP_CONNECTION_USAGE=0-2-1-1&d-g-LS_HTTPS_CONNECTIONS=1-1-1-1&d-g-LS_HTTPS_CONNECTION_USAGE=1-2-1-1&d-g-LS_VHOST_REQUESTS=2-1-1-1" }
     ],
 
     "paramSchema" : [
          {
-            "title" : "Report path",
+            "title" : "Report Path",
             "name" : "reportPath",
-            "description" : "The path to the lshttp .rtreport files",
+            "description" : "The system path to the lshttp .rtreport files. Default: /tmp/lshttpd.",
             "type" : "string",
             "default" : "/tmp/lshttpd"
         },
         {
-            "title": "Virtual Hosts",
-            "name": "virutalHosts",
-            "description": "Include individual VHosts in your graphs",
+            "title": "VHosts Filter",
+            "name": "vhosts_filter",
+            "description": "Include only specified vhosts in your graphs and exclude all others. If not set, all vhosts are shown. Format: vhost|alias.",
             "type" : "array",
             "items" : {
                 "type" : "string"
             }
+        },
+        {
+            "title": "Auto VHosts Limit",
+            "name": "auto_vhosts_limit",
+            "description": "Number of vhosts to show if vhost filtering is not enabled. Default: 20.",
+            "type" : "integer",
+            "default":  20
+        },
+        {
+            "title": "Use Partial Hostname",
+            "name": "partialHostname",
+            "description": "Use only first part of system hostname. Default: disabled. Example: Disabled: toaster.oven.com. Enabled: toaster.",
+            "type" : "boolean",
+            "default" : false
         }
     ]
 }
