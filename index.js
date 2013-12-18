@@ -168,7 +168,7 @@ function poll(cb){
 			var req = cur.REQUEST[i];
 			var src = _source + '-Req-' + req.VHOST;
 			
-			if( req.VHOST != "" && !_auto_vhosts_mode && !(req.VHOST in _vhosts)) 
+			if(!_auto_vhosts_mode && !(req.VHOST in _vhosts))
 				continue;
 
 			console.log('LS_REQ_COUNT %d %s', req.REQ_COUNT, src);
@@ -185,8 +185,9 @@ function poll(cb){
 		//EXTAPP loop
 		for(var i = cur.EXTAPP.length - 1, c = 0; i; i--){
 			var ext = cur.EXTAPP[i];
-			var src = _source + '-Ext-' + req.VHOST;
-								
+
+            var src = _source + "-Ext-" + (ext.VHOST.length ? ext.VHOST : "Global") + "-" + ext.NAME;
+
 			if( ext.VHOST != "" && !_auto_vhosts_mode && !(ext.VHOST in _vhosts)) 
 				continue;
 

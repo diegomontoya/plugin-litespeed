@@ -6,8 +6,7 @@
 	"main": "index.js",
 	"devDependencies": {},
 	"dependencies": {
-		"async": "0.2.9",
-		"graphdat-plugin-tools" : "0.0.1"
+		"async": "0.2.9"
 	},
 	"repository": {
 		"type": "git",
