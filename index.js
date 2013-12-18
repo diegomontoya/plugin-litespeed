@@ -62,8 +62,18 @@ function parseReport(reportPath, cb){
                 return cb(err);
             if (!file)
                 return cb(null, {});
+
+            var data;
+
+            try {
+                data = JSON.parse(file);
+            }
+            //must likely we are reading a partially written json file
+            catch (e) {
+                return cb(null, {});
+            }
          
-            return cb(null, JSON.parse(file));
+            return cb(null, data);
         });
     }
     catch(e){
