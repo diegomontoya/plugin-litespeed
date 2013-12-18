@@ -96,22 +96,22 @@ function getReportData(cb){
                 for(var k in result){
 					if( k == "GLOBAL" ) {
 						Object.keys(result[k]).forEach(function(key){
-							if( !(key in data[k]))
-								data[k][key] = result.GLOBAL[key];
-							else
-								data[k][key] += result.GLOBAL[key];
+							data[k][key] += result.GLOBAL[key];
 						});
 					}
 					else if( k == "REQUEST" || k == "EXTAPP" ) {
 						for(var j = result[k].length - 1; j; j--){
 							e = result[k][j];
-							
+
+                            //due to multicore, ext/requeset might exist in one core but not the other
+                            if( !(j in data[k]) ) {
+                                data[k][j] = e;
+                                continue;
+                            }
+
 							Object.keys(e).forEach(function(key){
 								if( key != "TYPE" && key != "VHOST" && key != "NAME" ){
-									if( !(key in data[k][j]))
-										data[k][j][key] = e[key];
-									else 
-										data[k][j][key] += e[key];
+									data[k][j][key] += e[key];
 								}								
 							});
 						}					
@@ -129,8 +129,6 @@ function poll(cb){
     getReportData(function(err, cur){
         if (err)
             return console.error(err);
-		
-		console.log(cur);
 
         var httpConnLimit = (cur.GLOBAL.HTTP_CONN_MAX) ? ( (cur.GLOBAL.HTTP_CONN_ACTIVE + cur.GLOBAL.HTTP_CONN_IDLE) / cur.GLOBAL.HTTP_CONN_MAX * 100).toFixed(0) : 0;
         var httpsConnLimit = (cur.GLOBAL.SSL_CONN_MAX) ? (cur.GLOBAL.SSL_CONN_ACTIVE / cur.GLOBAL.SSL_CONN_MAX * 100).toFixed(0) : 0;
@@ -156,7 +154,7 @@ function poll(cb){
 		console.log('LS_ALL_REQ_PROCSSING %d %s', cur.GLOBAL.REQ_PROCESSING, _source);
 			
 		//REQUEST loop
-		for(var i = cur.REQUEST.length - 1, c = 1; i; i--){							
+		for(var i = cur.REQUEST.length - 1, c = 0; i; i--){
 			var req = cur.REQUEST[i];
 			var src = _source + '-Req-' + req.VHOST;
 			
@@ -175,7 +173,7 @@ function poll(cb){
 		}
 		
 		//EXTAPP loop
-		for(var i = cur.EXTAPP.length - 1, c = 1; i; i--){
+		for(var i = cur.EXTAPP.length - 1, c = 0; i; i--){
 			var ext = cur.EXTAPP[i];
 			var src = _source + '-Ext-' + req.VHOST;
 								
@@ -188,10 +186,10 @@ function poll(cb){
 			console.log('LS_EXT_ACTIVE %d %s', ext.ACTIVE, src);
 			console.log('LS_EXT_IDLE %d %s', ext.IDLE, src);
 			console.log('LS_EXT_QUEUE %d %s', ext.QUEUE, src);
-			console.log('LS_EXT_REQ %d %s', ext.REQ_RATE, src);
-			console.log('LS_EXT_REQ_TOTAL %d %s', ext.REQ_TOTAL, src);
-			
-			//loop protection for auto
+			console.log('LS_EXT_REQ_RATE %d %s', ext.REQ_RATE, src);
+			console.log('LS_EXT_REQ_COUNT %d %s', ext.REQ_COUNT, src);
+
+            //loop protection for auto
 			if(_auto_vhosts_mode && c >= _auto_vhosts_limit)
 				break;
 			
