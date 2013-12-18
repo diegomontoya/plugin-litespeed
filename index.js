@@ -151,7 +151,7 @@ function poll(cb){
 		
 		console.log('LS_ALL_REQ_COUNT %d %s', cur.GLOBAL.REQ_COUNT, _source);
         console.log('LS_ALL_REQ_RATE %d %s', cur.GLOBAL.REQ_RATE, _source);
-		console.log('LS_ALL_REQ_PROCSSING %d %s', cur.GLOBAL.REQ_PROCESSING, _source);
+		console.log('LS_ALL_REQ_ACTIVE %d %s', cur.GLOBAL.REQ_ACTIVE, _source);
 			
 		//REQUEST loop
 		for(var i = cur.REQUEST.length - 1, c = 0; i; i--){
@@ -163,7 +163,7 @@ function poll(cb){
 
 			console.log('LS_REQ_COUNT %d %s', req.REQ_COUNT, src);
 			console.log('LS_REQ_RATE %d %s', req.REQ_RATE, src);
-			console.log('LS_REQ_PROCESSING %s %s', req.REQ_PROCESSING, src);
+			console.log('LS_REQ_ACTIVE %s %s', req.REQ_ACTIVE, src);
 			
 			//loop protection for auto
 			if(_auto_vhosts_mode && c >= _auto_vhosts_limit)
