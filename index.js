@@ -90,11 +90,14 @@ function getReportData(cb){
         {
             if (err)
                 return cb(err);
-            if (!results || results.length === 0)
+            if (!results || results.length == 0)
                 return cb(null, {});
 
             // pick index 0 to use as the base
             var data = results[0];
+
+            if (!data)
+                return cb(null, {});
 
             // go through every result (off by 1 as 0 is our base)
             for(var i=1; i<results.length; i++){
@@ -106,8 +109,10 @@ function getReportData(cb){
 
                 Object.keys(result).forEach(function(k){
                     //bad data
-                    if(!result[k])
+                    if(!(k in data)) {
+                        data[k] = result[k];
                         return;
+                    }
 
 					if( k == "GLOBAL" ) {
 						Object.keys(result[k]).forEach(function(key){
