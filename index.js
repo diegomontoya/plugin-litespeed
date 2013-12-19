@@ -98,12 +98,17 @@ function getReportData(cb){
 
             // go through every result (off by 1 as 0 is our base)
             for(var i=1; i<results.length; i++){
-                if (!results[i] || Object.keys(results[i]).length === 0)
-                    continue;
-
                 var result = results[i];
 
-                for(var k in result){
+                //bad data
+                if (!results || Object.keys(results).length === 0)
+                    continue;
+
+                Object.keys(result).forEach(function(k){
+                    //bad data
+                    if(!result[k])
+                        return;
+
 					if( k == "GLOBAL" ) {
 						Object.keys(result[k]).forEach(function(key){
 							data[k][key] += result.GLOBAL[key];
@@ -126,7 +131,7 @@ function getReportData(cb){
 							});
 						}					
 					}					                   
-                }
+                });
             }
 			
             return cb(null, data);
