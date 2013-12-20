@@ -25,6 +25,8 @@ var _enable_vhost_ext = _param.enableVhostExt || false;
 _reportPath = _param.reportPath || '/tmp/lshttpd';
 
 // set the pollTime if we do not have one
+if(_param.pollInterval) _param.pollInterval *= 1000;
+
 _pollInterval = _param.pollInterval || 1000;
 if(_pollInterval > 1000) _pollInterval = 1000; //any lower than 1s is meaningless
 
