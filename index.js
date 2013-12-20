@@ -28,7 +28,7 @@ _reportPath = _param.reportPath || '/tmp/lshttpd';
 if(_param.pollInterval) _param.pollInterval *= 1000;
 
 _pollInterval = _param.pollInterval || 1000;
-if(_pollInterval > 1000) _pollInterval = 1000; //any lower than 1s is meaningless
+if(_pollInterval < 1000) _pollInterval = 1000; //any lower than 1s is meaningless
 
 //default to to full host name or partial if partialHostname is set to true
 if(_param.partialHostname)
