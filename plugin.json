@@ -40,9 +40,6 @@
         "LS_EXT_REQ_RATE",
         "LS_EXT_REQ_COUNT"
     ],
-
-    "dashboards": [],
-
     "paramSchema" : [
          {
             "title" : "Report Path",
@@ -85,15 +82,15 @@
             "title": "Auto VHosts Limit",
             "name": "auto_vhosts_limit",
             "description": "Number of vhosts to show if vhost filtering is not enabled. Default: 20.",
-            "type" : "integer",
+            "type" : "string",
             "default":  20
         },
         {
             "title": "Poll Interval",
             "name": "pollInterval",
-            "description": "Poll interval. Default: 15.",
-            "type" : "integer",
-            "default":  15
+            "description": "Poll interval. Default: 5.",
+            "type" : "string",
+            "default":  5
         }
     ]
 }
