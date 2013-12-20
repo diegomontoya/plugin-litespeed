@@ -13,6 +13,10 @@ var _vhosts = {}; // the virtual hosts to monitor, if none, show all with limit 
 var _auto_vhosts_limit = _param.auto_vhosts_limit || 20; //if vhosts are not set and in auto mode, how many should we show?
 var _auto_vhosts_mode = true; //are we in auto vhosts mode
 
+var _enable_vhost_req = _param.enableVhostReq || false;
+var _enable_vhost_ext = _param.enableVhostExt || false;
+
+
 // ==========
 // CONFIG & VALIDATION
 // ==========
@@ -174,48 +178,52 @@ function poll(cb){
 		console.log('LS_ALL_REQ_ACTIVE %d %s', cur.GLOBAL.REQ_ACTIVE, _source);
 			
 		//REQUEST loop
-		for(var i = cur.REQUEST.length - 1, c = 0; i; i--){
-			var req = cur.REQUEST[i];
-			var src = _source + '-Req-' + req.VHOST;
-			
-			if(!_auto_vhosts_mode && !(req.VHOST in _vhosts))
-				continue;
+        if(_enable_vhost_req) {
+            for(var i = cur.REQUEST.length - 1, c = 0; i; i--){
+                var req = cur.REQUEST[i];
+                var src = _source + '-Req-' + req.VHOST;
 
-			console.log('LS_REQ_COUNT %d %s', req.REQ_COUNT, src);
-			console.log('LS_REQ_RATE %d %s', req.REQ_RATE, src);
-			console.log('LS_REQ_ACTIVE %s %s', req.REQ_ACTIVE, src);
-			
-			//loop protection for auto
-			if(_auto_vhosts_mode && c >= _auto_vhosts_limit)
-				break;
-			
-			c++;
-		}
-		
+                if(!_auto_vhosts_mode && !(req.VHOST in _vhosts))
+                    continue;
+
+                console.log('LS_REQ_COUNT %d %s', req.REQ_COUNT, src);
+                console.log('LS_REQ_RATE %d %s', req.REQ_RATE, src);
+                console.log('LS_REQ_ACTIVE %s %s', req.REQ_ACTIVE, src);
+
+                //loop protection for auto
+                if(_auto_vhosts_mode && c >= _auto_vhosts_limit)
+                    break;
+
+                c++;
+            }
+        }
+
 		//EXTAPP loop
-		for(var i = cur.EXTAPP.length - 1, c = 0; i; i--){
-			var ext = cur.EXTAPP[i];
+        if(_enable_vhost_ext) {
+            for(var i = cur.EXTAPP.length - 1, c = 0; i; i--){
+                var ext = cur.EXTAPP[i];
 
-            var src = _source + "-Ext-" + (ext.VHOST.length ? ext.VHOST : "Global") + "-" + ext.NAME;
+                var src = _source + "-Ext-" + (ext.VHOST.length ? ext.VHOST : "Global") + "-" + ext.NAME;
 
-			if( ext.VHOST != "" && !_auto_vhosts_mode && !(ext.VHOST in _vhosts)) 
-				continue;
+                if( ext.VHOST != "" && !_auto_vhosts_mode && !(ext.VHOST in _vhosts))
+                    continue;
 
-			console.log('LS_EXT_CMAX %d %s', ext.CMAX, src);
-			console.log('LS_EXT_EMAX %d %s', ext.EMAX, src);
-			console.log('LS_EXT_POOL %d %s', ext.POOL, src);
-			console.log('LS_EXT_ACTIVE %d %s', ext.ACTIVE, src);
-			console.log('LS_EXT_IDLE %d %s', ext.IDLE, src);
-			console.log('LS_EXT_QUEUE %d %s', ext.QUEUE, src);
-			console.log('LS_EXT_REQ_RATE %d %s', ext.REQ_RATE, src);
-			console.log('LS_EXT_REQ_COUNT %d %s', ext.REQ_COUNT, src);
+                console.log('LS_EXT_CMAX %d %s', ext.CMAX, src);
+                console.log('LS_EXT_EMAX %d %s', ext.EMAX, src);
+                console.log('LS_EXT_POOL %d %s', ext.POOL, src);
+                console.log('LS_EXT_ACTIVE %d %s', ext.ACTIVE, src);
+                console.log('LS_EXT_IDLE %d %s', ext.IDLE, src);
+                console.log('LS_EXT_QUEUE %d %s', ext.QUEUE, src);
+                console.log('LS_EXT_REQ_RATE %d %s', ext.REQ_RATE, src);
+                console.log('LS_EXT_REQ_COUNT %d %s', ext.REQ_COUNT, src);
 
-            //loop protection for auto
-			if(_auto_vhosts_mode && c >= _auto_vhosts_limit)
-				break;
-			
-			c++;
-		}       
+                //loop protection for auto
+                if(_auto_vhosts_mode && c >= _auto_vhosts_limit)
+                    break;
+
+                c++;
+            }
+        }
     });
 	
     setTimeout(poll, _pollInterval);

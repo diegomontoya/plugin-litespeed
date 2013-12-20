@@ -52,6 +52,27 @@
             "default" : "/tmp/lshttpd"
         },
         {
+            "title": "Enble Partial Hostname",
+            "name": "partialHostname",
+            "description": "Use only first part of system hostname. Default: disabled. Example: Disabled: toaster.oven.com. Enabled: toaster.",
+            "type" : "boolean",
+            "default" : false
+        },
+        {
+            "title": "Enable VHosts Level Request",
+            "name": "enableVhostReq",
+            "description": "Enable the logging of vhost level request metric.",
+            "type" : "boolean",
+            "default" : false
+        },
+        {
+            "title": "Enable VHosts Level ExtApps",
+            "name": "enableVhostExt",
+            "description": "Enable the loggin of vhost level external app metric.",
+            "type" : "boolean",
+            "default" : false
+        },
+        {
             "title": "VHosts Filter",
             "name": "vhosts_filter",
             "description": "Include only specified vhosts in your graphs and exclude all others. If not set, all vhosts are shown. Format: vhost|alias.",
@@ -68,11 +89,11 @@
             "default":  20
         },
         {
-            "title": "Use Partial Hostname",
-            "name": "partialHostname",
-            "description": "Use only first part of system hostname. Default: disabled. Example: Disabled: toaster.oven.com. Enabled: toaster.",
-            "type" : "boolean",
-            "default" : false
+            "title": "Poll Interval",
+            "name": "pollInterval",
+            "description": "Poll interval. Default: 15.",
+            "type" : "integer",
+            "default":  15
         }
     ]
 }
