@@ -87,7 +87,7 @@
         },
         {
             "title": "Poll Interval",
-            "name": "pollInterval",
+            "name": "pollIntervalCustom",
             "description": "Poll interval. Default: 5.",
             "type" : "string",
             "default":  5
